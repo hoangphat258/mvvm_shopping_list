@@ -11,21 +11,20 @@ import com.example.mvvmshoppingapp.data.ShoppingDatabase
 import com.example.mvvmshoppingapp.data.entities.ShoppingItem
 import com.example.mvvmshoppingapp.data.repositories.ShoppingRepository
 import com.example.mvvmshoppingapp.data.shoppinglist.*
+import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
+@AndroidEntryPoint
 class MainActivity : AppCompatActivity(), AddDialogListener {
 
+    @Inject
     lateinit var viewModel: ShoppingViewModel
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        val database = ShoppingDatabase(this)
-        val repository = ShoppingRepository(database)
-        val factory = ShoppingViewModelFactory(repository)
-
-        viewModel = ViewModelProvider(this, factory).get(ShoppingViewModel::class.java)
         val adapter = ShoppingItemAdapter(listOf(), viewModel)
 
         rvShoppingItems.layoutManager = LinearLayoutManager(this)

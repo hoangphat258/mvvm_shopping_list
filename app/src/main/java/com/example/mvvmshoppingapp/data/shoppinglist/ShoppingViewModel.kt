@@ -9,8 +9,9 @@ import com.example.mvvmshoppingapp.data.repositories.ShoppingRepository
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
-class ShoppingViewModel(
+class ShoppingViewModel @Inject constructor(
     private val repository: ShoppingRepository
 ): ViewModel() {
 
