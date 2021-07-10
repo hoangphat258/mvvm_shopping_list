@@ -13,7 +13,7 @@
 .externalNativeBuild
 .cxx
 local.properties
-# Built application files
+.idea# Built application files
 *.apk
 *.aar
 *.ap_

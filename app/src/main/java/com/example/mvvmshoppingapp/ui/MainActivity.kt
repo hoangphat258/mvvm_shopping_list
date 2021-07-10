@@ -3,23 +3,19 @@ package com.example.mvvmshoppingapp.ui
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import androidx.activity.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.mvvmshoppingapp.R
-import com.example.mvvmshoppingapp.data.ShoppingDatabase
 import com.example.mvvmshoppingapp.data.entities.ShoppingItem
-import com.example.mvvmshoppingapp.data.repositories.ShoppingRepository
 import com.example.mvvmshoppingapp.data.shoppinglist.*
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.activity_main.*
-import javax.inject.Inject
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity(), AddDialogListener {
 
-    @Inject
-    lateinit var viewModel: ShoppingViewModel
+    private val viewModel: ShoppingViewModel by viewModels()
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -30,7 +26,7 @@ class MainActivity : AppCompatActivity(), AddDialogListener {
         rvShoppingItems.layoutManager = LinearLayoutManager(this)
         rvShoppingItems.adapter = adapter
 
-        viewModel.getAllShoppingItems().observe(this, Observer {
+        viewModel.shoppingItems.observe(this, Observer {
             adapter.items = it
             adapter.notifyDataSetChanged()
             for (i in it) {

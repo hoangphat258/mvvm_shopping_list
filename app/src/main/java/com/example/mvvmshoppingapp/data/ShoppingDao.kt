@@ -1,8 +1,8 @@
 package com.example.mvvmshoppingapp.data
 
-import androidx.lifecycle.LiveData
 import androidx.room.*
 import com.example.mvvmshoppingapp.data.entities.ShoppingItem
+import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ShoppingDao {
@@ -13,5 +13,5 @@ interface ShoppingDao {
     suspend fun delete(item: ShoppingItem)
 
     @Query("SELECT * FROM shopping_items")
-    fun getAllShoppingItems(): LiveData<List<ShoppingItem>>
+    fun getAllShoppingItems(): Flow<List<ShoppingItem>>
 }
